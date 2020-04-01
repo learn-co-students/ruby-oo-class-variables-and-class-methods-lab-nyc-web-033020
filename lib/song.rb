@@ -34,10 +34,11 @@ class Song
     def self.genre_count
         genre_hash = {}
             while @@genres do |genre|
-            if genre
-                genre_hash[genre] += 1
-            else
-                genre_hash[genre]
+                if genre
+                    genre_hash[genre] += 1
+                else
+                    genre_hash[genre]
+                end
             end
         genre_hash
     end

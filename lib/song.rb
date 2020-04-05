@@ -26,18 +26,24 @@ class Song
 
 def self.genre_count
   hash = { }
-  @@genres.each_with_index do |element, index|
-    element ||= hash[element]
-    hash[element] = index
+  @@genres.each do |element|
+    if hash[element] 
+      hash[element] = 2 
+    else 
+      hash[element] = 1  
+    end 
   end
   hash
 end
 
 def self.artist_count
   hash = { }
-  @@artists.each_with_index do |element, index|
-    element ||= hash[element]
-    hash[element] = index
+  @@artists.each do |element|
+    if hash[element] 
+      hash[element] = 2 
+    else 
+      hash[element] = 1  
+    end 
   end
   hash
 end

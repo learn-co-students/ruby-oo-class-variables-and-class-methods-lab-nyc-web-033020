@@ -1,46 +1,48 @@
-require 'pry'
-
 class Song
-    @@count = 0
-    @@genres = []
-    @@artists = []
+    attr_reader :name, :artist, :genre
 
-    attr_accessor :name, :artist, :genre
+    @@count = 0
+    @@artists = []
+    @@genres = []
 
     def initialize(name, artist, genre)
         @name = name
         @artist = artist
         @genre = genre
         @@count += 1
-        @@genres << genre
         @@artists << artist
+        @@genres << genre
     end
 
     def self.count
         @@count
     end
 
-    def self.genres
-        @@genres.uniq
-    end
-
     def self.artists
         @@artists.uniq
     end
 
-    def self.genre_count
-        genre_list = Hash.new(0)
-        @@genres.each do |genre|
-            genre_list[genre] += 1
-        end
-        genre_list
+    def self.genres
+        @@genres.uniq
     end
 
-    def self.artist_count
-        artist_list = Hash.new(0)
-        @@artists.each do |artist|
-            artist_list[artist] += 1
+    def self.genre_count
+        @@genres.each_with_object(Hash.new) do |genre, new_hash|
+            if new_hash[genre]
+                new_hash[genre] += 1
+            else
+                new_hash[genre] = 1
+            end
         end
-        artist_list
+    end
+    
+    def self.artist_count
+        @@artists.each_with_object(Hash.new) do |artist, new_hash|
+            if new_hash[artist]
+                new_hash[artist] += 1
+            else
+                new_hash[artist] = 1
+            end
+        end
     end
 end
